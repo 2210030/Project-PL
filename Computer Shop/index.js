@@ -1,7 +1,8 @@
-inventory = [];
-maxComputer = 0;
+inventory = []; 
+maxComputer = 0; // initializing computer numbers to zero
 listOfSerialNumber = [];
-const password = "password";
+const password = "password"; // setting password
+// a computer class is created with attributes serialNumber, brand, model and price
 class Computer {
     constructor(serialNumber, brand, model, price) {
       this.serialNumber = serialNumber;
@@ -16,14 +17,17 @@ class Computer {
 }
 
 function main(){
-    alert("Welcome to My Computer Shop");
+    alert("Welcome to My Computer Shop"); // alert message when enters the website
 }
+// To input number of computers in the shop
 function maxComputerInput(){
     maxComputer = parseInt(prompt("Enter maximum number of computers"));
     if(!maxComputer){
         maxComputerInput();
     }
 }
+// This function will append the user inputs from inventory to table.
+// It also append the inputs when they are changed using edit button
 function render(){
     $("#tbody").empty();
     inventory.forEach(element => {
@@ -33,14 +37,14 @@ function render(){
             <td>${element.brand}</td>\
             <td>${element.model}</td>\
             <td>${element.price}</td>\
-            <td><img class="edit" src = "editicon.png" alt="edit icon" onclick="edit('${element.serialNumber}')"/></td>\
+            <td><img class="edit" src = "editicon.png" alt="edit icon" onclick="edit('${element.serialNumber}')"/></td>\ 
             </tr>`
         )
     });
 }
 function edit(serialNumber){
     $('#exampleModalCenter').modal('show');
-    element = inventory.filter(item =>{
+    element = inventory.filter(item =>{ 
         return item.serialNumber == serialNumber;
     })
     $("#editserialnumber").val(element[0].serialNumber);
@@ -48,6 +52,7 @@ function edit(serialNumber){
     $("#editmodel").val(element[0].model); 
     $("#editprice").val(element[0].price);
 }
+// User authentication 
 function authUser(loginAttempt = 0){
     userpass = prompt("Enter your password");
     if(userpass == password){
@@ -60,6 +65,7 @@ function authUser(loginAttempt = 0){
         return false
     }
 }
+// form creation and conditions
 function formSubmit(e){
     e.preventDefault();
     serialNumber = $("#serialnumber").val();
@@ -86,6 +92,7 @@ function formSubmit(e){
     
     $("#reset").click();
 }
+// updates the table with the values entered by the user
 function updateTable(e){
     e.preventDefault();
     editserialnumber = $("#editserialnumber").val();
@@ -103,7 +110,6 @@ function updateTable(e){
     render();
     
 }
-
 main();
 maxComputerInput();
 
